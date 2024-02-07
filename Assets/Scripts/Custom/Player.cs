@@ -40,11 +40,12 @@ public class Plaeyr : NetworkBehaviour
             if (!IsTeacher)
                 return;
 
-            hardwareRig.Headset.GetComponent<VisionInteractor>().enabled = true;
-            hardwareRig.RightHand.GetComponent<RayBeamer>().enabled = true;
-            hardwareRig.LeftHand.GetComponent<RayBeamer>().enabled = true;
+            //For teacher only!
+            //hardwareRig.Headset.GetComponent<VisionInteractor>().enabled = true;
+            //hardwareRig.RightHand.GetComponent<RayBeamer>().enabled = true;
+            //hardwareRig.LeftHand.GetComponent<RayBeamer>().enabled = true;
 
-            hardwareRig.GetComponent<RigLocomotion>().enabled = true;
+            //hardwareRig.GetComponent<RigLocomotion>().enabled = true;
         }
     }
 

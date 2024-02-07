@@ -9,7 +9,13 @@ using Fusion;
 
 public class ConnectionManager : MonoBehaviour, INetworkRunnerCallbacks
 {
+    public UnityEvent PlayerJoined => playerJoined;
+    public UnityEvent PlayerLeft => playerLeft;
+
     public UnityEvent Conenected => connected;
+
+    [SerializeField] UnityEvent playerJoined;
+    [SerializeField] UnityEvent playerLeft;
 
     [SerializeField] NetworkObject playerPrefab;
     [SerializeField] NetworkRunner runner;
@@ -67,6 +73,8 @@ public class ConnectionManager : MonoBehaviour, INetworkRunnerCallbacks
 
             NetworkObject networkPlayerObject = runner.Spawn(playerPrefab, position: transform.position, rotation: transform.rotation, inputAuthority: player);
             spawnedPlayers.Add(player, networkPlayerObject);
+
+            playerJoined?.Invoke();
         }
     }
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
@@ -75,6 +83,8 @@ public class ConnectionManager : MonoBehaviour, INetworkRunnerCallbacks
         {
             runner.Despawn(networkObject);
             spawnedPlayers.Remove(player);
+
+            playerLeft?.Invoke();
         }
     }
 

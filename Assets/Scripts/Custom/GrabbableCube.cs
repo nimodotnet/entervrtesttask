@@ -1,5 +1,6 @@
 using Fusion;
 using Fusion.XR.Host.Grabbing;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,7 +8,7 @@ public class GrabbableCube : NetworkBehaviour
 {
     public UnityEvent Transferred => transferred;
 
-    [SerializeField] uint lastPlayerId;
+    uint LastPlayerId { get; set; }
 
     [SerializeField] UnityEvent transferred;
 
@@ -22,13 +23,18 @@ public class GrabbableCube : NetworkBehaviour
 
     void OnGrabbed(NetworkGrabber grabber)
     {
-        var playerObject = grabber.GetComponentInParent<NetworkObject>();
-        var objectId = playerObject.Id;
-
-        if (lastPlayerId == objectId.Raw)
+        if (Runner.ActivePlayers.Count() == 1)
             return;
 
-        lastPlayerId = objectId.Raw;
+        var playerObject = grabber.transform.root.GetComponent<NetworkObject>();
+        var objectId = playerObject.Id;
+
+        if (LastPlayerId == objectId.Raw)
+            return;
+
+        LastPlayerId = objectId.Raw;
         transferred?.Invoke();
     }
+
+    public void ResetLastId() => LastPlayerId = 0;
 }

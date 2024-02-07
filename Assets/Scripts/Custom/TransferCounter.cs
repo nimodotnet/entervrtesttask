@@ -5,7 +5,7 @@ public class TransferCounter : MonoBehaviour
 {
     [SerializeField] TextMeshPro scoreVisual;
 
-    int score = 0;
+    public int Score { get; set; }
 
     private void Awake()
     {
@@ -14,8 +14,10 @@ public class TransferCounter : MonoBehaviour
 
     public void AddScore()
     {
-        score++;
+        Score++;
 
-        scoreVisual.SetText(score.ToString());
+        scoreVisual.SetText(Score.ToString());
     }
+
+    public void ResetScore() => Score = 0;
 }

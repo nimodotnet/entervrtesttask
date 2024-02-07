@@ -424,6 +424,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3b2dfec39f015045b1dbe3b2d68d390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerJoined:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1013086809}
+        m_TargetAssemblyTypeName: TransferCounter, Assembly-CSharp
+        m_MethodName: ResetScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1263433896}
+        m_TargetAssemblyTypeName: GrabbableCube, Assembly-CSharp
+        m_MethodName: ResetLastId
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  playerLeft:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1013086809}
+        m_TargetAssemblyTypeName: TransferCounter, Assembly-CSharp
+        m_MethodName: ResetScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1263433896}
+        m_TargetAssemblyTypeName: GrabbableCube, Assembly-CSharp
+        m_MethodName: ResetLastId
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   playerPrefab: {fileID: 2549000073306557744, guid: 55507db2cdbad6346a165571066fa0e7, type: 3}
   runner: {fileID: 0}
   connected:
@@ -4326,7 +4380,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1013086808}
   - component: {fileID: 1013086807}
-  - component: {fileID: 1013086806}
+  - component: {fileID: 1013086809}
   m_Layer: 0
   m_Name: Counter
   m_TagString: Untagged
@@ -4334,19 +4388,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1013086806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1013086805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80aa342533aab104ea7e239540df3939, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreVisual: {fileID: 0}
 --- !u!114 &1013086807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4382,6 +4423,19 @@ RectTransform:
   m_AnchoredPosition: {x: 3.044, y: 1.331}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1013086809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013086805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80aa342533aab104ea7e239540df3939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreVisual: {fileID: 1864916842}
 --- !u!1001 &1051769254
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4558,7 +4612,7 @@ MonoBehaviour:
   penLayer:
     serializedVersion: 2
     m_Bits: 4096
-  distanceThreshold: 0.1
+  distanceThreshold: 0.03
   color: {r: 1, g: 1, b: 1, a: 1}
   width: 0.3
   smoothness: 12
@@ -5633,11 +5687,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ca337b182afd74e95cbf25832abfda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastPlayerId: 0
   transferred:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1013086806}
+      - m_Target: {fileID: 1013086809}
         m_TargetAssemblyTypeName: TransferCounter, Assembly-CSharp
         m_MethodName: AddScore
         m_Mode: 1
@@ -9267,8 +9320,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 424de3e6f3bdbe444b2fa18a79647746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxStreamHeight: 0
   pourOutAngle: 90
-  maxSurfaceDistance: 5
   neckPoint: {fileID: 444173228}
   substance: {fileID: 2157442149057136004, guid: 29650d9973c0c6548bcf479a49db0992, type: 3}
   interactionLayer:

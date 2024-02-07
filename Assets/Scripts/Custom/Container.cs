@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Container : MonoBehaviour
 {
-    public float Angle => angle;
+    public float MaxSurfaceDistance => maxStreamHeight;
     public float PourOutAngle => pourOutAngle;
-    public float MaxSurfaceDistance => maxSurfaceDistance;
+    public float Angle => angle;
 
     public Transform NeckPoint => neckPoint;
     public Substance Substance => substance;
@@ -12,8 +12,8 @@ public class Container : MonoBehaviour
     public RaycastHit RaycastHit => raycastHit;
 
 
+    [SerializeField] float maxStreamHeight;
     [SerializeField] float pourOutAngle;
-    [SerializeField] float maxSurfaceDistance;
 
     [SerializeField] Transform neckPoint;
     [SerializeField] Substance substance;
@@ -52,7 +52,7 @@ public class Container : MonoBehaviour
 
     void CheckForSurface()
     {
-        if (Physics.Raycast(neckPoint.position, Vector3.down, out raycastHit, maxSurfaceDistance, interactionLayer))
+        if (Physics.Raycast(neckPoint.position, Vector3.down, out raycastHit, maxStreamHeight, interactionLayer))
         {
             streamIndicator.SetActive(true);
             substanceStream.CheckForSubstance(raycastHit, substance.Name);
