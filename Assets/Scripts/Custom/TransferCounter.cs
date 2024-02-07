@@ -1,23 +1,47 @@
+using Fusion;
 using TMPro;
-using UnityEngine;
 
-public class TransferCounter : MonoBehaviour
+public class TransferCounter : NetworkBehaviour
 {
-    [SerializeField] TextMeshPro scoreVisual;
+    [Networked] public int Score { get; set; }
 
-    public int Score { get; set; }
+    ChangeDetector changeDetector;
+    TextMeshPro scoreVisual;
 
     private void Awake()
     {
         scoreVisual = GetComponentInChildren<TextMeshPro>();
     }
 
+    public override void Spawned()
+    {
+        base.Spawned();
+
+        changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
+    }
+
     public void AddScore()
     {
         Score++;
-
-        scoreVisual.SetText(Score.ToString());
     }
 
-    public void ResetScore() => Score = 0;
+    public override void Render()
+    {
+        base.Render();
+
+        SyncScore();
+    }
+
+
+    void SyncScore()
+    {
+        foreach (var change in changeDetector.DetectChanges(this))
+        {
+            if (change == nameof(Score))
+            {
+                scoreVisual.SetText(Score.ToString());
+                break;
+            }
+        }
+    }
 }

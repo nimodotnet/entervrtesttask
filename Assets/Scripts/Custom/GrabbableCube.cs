@@ -23,9 +23,6 @@ public class GrabbableCube : NetworkBehaviour
 
     void OnGrabbed(NetworkGrabber grabber)
     {
-        if (Runner.ActivePlayers.Count() == 1)
-            return;
-
         var playerObject = grabber.transform.root.GetComponent<NetworkObject>();
         var objectId = playerObject.Id;
 
@@ -35,6 +32,4 @@ public class GrabbableCube : NetworkBehaviour
         LastPlayerId = objectId.Raw;
         transferred?.Invoke();
     }
-
-    public void ResetLastId() => LastPlayerId = 0;
 }
